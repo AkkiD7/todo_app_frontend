@@ -38,8 +38,8 @@ const TodoPage = () => {
   const refreshTodos = useCallback(async () => {
     try {
       const response = filter
-        ? await axios.get(`${API_URL}/filter?status=${filter}`)
-        : await axios.get(API_URL);
+        ? await axios.get(`https://todo-app-backend-akki.vercel.app/todos/filter?status=${filter}`)
+        : await axios.get("https://todo-app-backend-akki.vercel.app/todos");
 
       
       const sortedTodos = response.data.sort((a, b) => {
