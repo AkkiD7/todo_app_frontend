@@ -41,14 +41,11 @@ const TodoPage = () => {
         ? await axios.get(`${API_URL}/filter?status=${filter}`)
         : await axios.get(API_URL);
 
-      console.log('API Response:', response.data);  // Log the API response
-
-      // Ensure the response data is an array
-      const data = Array.isArray(response.data) ? response.data : [];
-      const sortedTodos = data.sort((a, b) => {
+      
+      const sortedTodos = response.data.sort((a, b) => {
         const dateA = getTimestampFromId(a._id);
         const dateB = getTimestampFromId(b._id);
-        return dateB - dateA;
+        return dateB - dateA; 
       });
 
       setTodos(sortedTodos);
@@ -273,31 +270,28 @@ const TodoPage = () => {
             </h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <form onSubmit={editTodo ? handleEditTodo : handleAddTodo}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="description">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full p-2 border rounded"
-                />
+              <input
+                type="text"
+                className="p-2 border border-gray-300 rounded w-full mb-4"
+                placeholder="Task description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="p-2 bg-[#626ff1] text-white rounded mr-2"
+                >
+                  {editTodo ? "Save Changes" : "Add Task"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => resetForm()}
+                  className="p-2 bg-gray-300 rounded"
+                >
+                  Cancel
+                </button>
               </div>
-              <button
-                type="submit"
-                className="p-2 bg-[#626ff1] text-white rounded w-full"
-              >
-                {editTodo ? "Update Task" : "Add Task"}
-              </button>
-              <button
-                type="button"
-                onClick={resetForm}
-                className="p-2 bg-gray-300 text-black rounded w-full mt-2"
-              >
-                Cancel
-              </button>
             </form>
           </div>
         </div>
@@ -309,26 +303,30 @@ const TodoPage = () => {
             <h2 className="text-xl font-semibold mb-4">Upload CSV</h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <form onSubmit={handleFileUpload}>
-              <div className="mb-4">
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  className="w-full"
-                />
+              <input
+                type="file"
+                accept=".csv"
+                onChange={(e) => setFile(e.target.files[0])}
+                className="p-2 border border-gray-300 rounded w-full mb-4"
+              />
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="p-2 bg-[#626ff1] text-white rounded mr-2"
+                >
+                  Upload
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowUploadModal(false);
+                    setError("");
+                  }}
+                  className="p-2 bg-gray-300 rounded"
+                >
+                  Cancel
+                </button>
               </div>
-              <button
-                type="submit"
-                className="p-2 bg-[#626ff1] text-white rounded w-full"
-              >
-                Upload
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowUploadModal(false)}
-                className="p-2 bg-gray-300 text-black rounded w-full mt-2"
-              >
-                Cancel
-              </button>
             </form>
           </div>
         </div>
