@@ -38,7 +38,7 @@ const TodoPage = () => {
   const refreshTodos = useCallback(async () => {
     try {
       const response = filter
-        ? await axios.get(`https://todo-app-backend-akki.vercel.app/todos/filter?status=${filter}`)
+        ? await axios.get(`https://todo-app-backend-akki.vercel.app/todos${filter}`)
         : await axios.get("https://todo-app-backend-akki.vercel.app/todos");
 
       
