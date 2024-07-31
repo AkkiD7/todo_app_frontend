@@ -23,7 +23,7 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-const API_URL = "https://todo-app-backend-6n7t.onrender.com/todos";
+const API_URL = "https://todo-app-backend-akki.vercel.app/todos";
 
 const TodoPage = () => {
   const [todos, setTodos] = useState([]);
