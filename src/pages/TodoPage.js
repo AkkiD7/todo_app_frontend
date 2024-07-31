@@ -37,29 +37,24 @@ const TodoPage = () => {
 
   const refreshTodos = useCallback(async () => {
     try {
-      console.log("API_URL:", API_URL);
-      console.log("Filter:", filter);
-  
+
       const response = filter
         ? await axios.get(`${API_URL}/filter?status=${filter}`)
         : await axios.get(API_URL);
-  
-      console.log("Response Data:", response.data);
-  
+
       const sortedTodos = response.data.sort((a, b) => {
         const dateA = getTimestampFromId(a._id);
         const dateB = getTimestampFromId(b._id);
-        return dateB - dateA;
+        return dateB - dateA; 
       });
-  
+
       setTodos(sortedTodos);
       setError("");
     } catch (err) {
-      console.error("Error fetching todos:", err);
+      console.error(err);
       setError("Failed to fetch todos");
     }
   }, [filter]);
-  
 
   const handleAddTodo = async (e) => {
     e.preventDefault();
