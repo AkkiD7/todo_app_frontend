@@ -39,7 +39,7 @@ const TodoPage = () => {
     try {
       console.log("API_URL:", API_URL);
       console.log("Filter:", filter);
-      
+  
       const response = filter
         ? await axios.get(`${API_URL}/filter?status=${filter}`)
         : await axios.get(API_URL);
@@ -49,7 +49,7 @@ const TodoPage = () => {
       const sortedTodos = response.data.sort((a, b) => {
         const dateA = getTimestampFromId(a._id);
         const dateB = getTimestampFromId(b._id);
-        return dateB - dateA; 
+        return dateB - dateA;
       });
   
       setTodos(sortedTodos);
