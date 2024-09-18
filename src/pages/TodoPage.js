@@ -173,7 +173,7 @@ const TodoPage = () => {
   return (
     <div className="container mx-auto p-6 lg:p-32">
       <h1 className="text-2xl lg:text-3xl font-bold text-gray-700 mb-4 w-full text-center">
-        Todo List
+        Task Master
       </h1>
 
       <div className="flex flex-col lg:flex-row justify-between items-center mb-4">
